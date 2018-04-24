@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
+import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'ng-e-app-header',
@@ -12,10 +13,11 @@ export class AppHeaderComponent implements OnInit {
     lastName: 'Ayaz'
   };
   isLoggedIn: boolean;
-  constructor() { }
+  constructor(private data:AppService) { }
 
   ngOnInit() {
     this.isLoggedIn = false;
+    this.data.currLoginStatus.subscribe(status=>this.isLoggedIn=status)
   }
 
   /**
@@ -24,6 +26,7 @@ export class AppHeaderComponent implements OnInit {
    */
   login() {
     this.isLoggedIn = true;
+    this.data.ChangeLoginStatus(this.isLoggedIn);
   }
 
   /**
@@ -32,6 +35,7 @@ export class AppHeaderComponent implements OnInit {
    */
   signup() {
     this.isLoggedIn = true;
+    this.data.ChangeLoginStatus(this.isLoggedIn);
   }
 
   /**
@@ -40,6 +44,7 @@ export class AppHeaderComponent implements OnInit {
    */
   logout() {
     this.isLoggedIn = false;
+    this.data.ChangeLoginStatus(this.isLoggedIn);
   }
 
 }

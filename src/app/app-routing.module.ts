@@ -2,8 +2,24 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LandingComponent } from './landing/landing.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { UsersListComponent } from './users-list/users-list.component';
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
+    path:'',
+    redirectTo:'users',
+    pathMatch:'full'
+  },
+{
+  path:'users',
+  component:UsersListComponent
+},
+{
+  path:'user-detail/:id',
+  component:UserDetailComponent
+},
+  {
   path: 'landing',
   component: LandingComponent
 }, {
@@ -11,7 +27,7 @@ const routes: Routes = [{
   component: HomeComponent
 }, {
   path: '**',
-  redirectTo: 'landing'
+  redirectTo: 'users'
 }];
 
 @NgModule({
